@@ -47,7 +47,6 @@ def normalize(signal):
 
 def plot_signals(noisy_test, signal_reconstructed_clean):
 
-
 	noisy_test_norm = normalize(noisy_test)
 	signal_reconstructed_clean_norm = normalize(signal_reconstructed_clean)
 
@@ -68,6 +67,7 @@ def plot_signals(noisy_test, signal_reconstructed_clean):
 	plt.show()
 
 if __name__ == '__main__':
+	
 	args = parse_args()
 
 	PATH_ROOT = os.getcwd() 
@@ -81,6 +81,6 @@ if __name__ == '__main__':
 
 	signal_reconstructed_clean, sr = mmse.MMSE_STSA(path_noisy_test, output_path_estimated_noisy_test, sr, noisy_test, NFFT, hop_length_sample, winfunc )
 
-	plot_signals(noisy_test, signal_reconstructed_clean)
+	# plot_signals(noisy_test, signal_reconstructed_clean)
 
-	#mmse.plot_signals(noisy_test,signal_reconstructed_clean,sr,NFFT,hop_length_sample)
+	mmse.plot_signals(noisy_test,signal_reconstructed_clean,sr,NFFT,hop_length_sample)
