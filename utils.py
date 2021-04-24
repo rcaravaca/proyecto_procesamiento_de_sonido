@@ -14,7 +14,7 @@ def check_args(args):
 	return args
 
 def parse_args():
-	parser = argparse.ArgumentParser(description='MMSE-STSA Speech Enhancement')
+	parser = argparse.ArgumentParser(description='Audio Enhancement')
 	# parser.add_argument('--datasets_dir', type=str, default='datasets/',
 	# 					help='')
 	# parser.add_argument('--input_clean', type=str, default='datasets/clean.wav',

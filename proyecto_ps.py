@@ -28,10 +28,12 @@ if __name__ == '__main__':
 	elif args.filter_type == "spect_sub":
 		## spectral subsraction
 		data_filtered = ss.spectral_sub(noisy_signal, nfft=args.num_FFT)
+		wav.write(args.output_file, sr, data_filtered.astype(np.int16))
 
 	elif args.filter_type == "wiener":
 		## Wiener denosing
 		data_filtered = wiener.wiener_filter2(noisy_signal=noisy_signal, frame_len=args.num_FFT)
+		wav.write(args.output_file, sr, data_filtered.astype(np.int16))
 
 	else:
 		print("FILTER_INFO: wrong filter_type")
