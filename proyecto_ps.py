@@ -42,6 +42,6 @@ if __name__ == '__main__':
 	print("FILTER_INFO: Processing time: {}".format(proc_time))
 
 	## Plot signals
-	if args.plot:
-		print("FILTER_INFO: Plotting")
-		utils.plot_signals(noisy_signal,data_filtered, sr, args.num_FFT)
+	# if args.plot:
+	# 	print("FILTER_INFO: Plotting")
+	# 	utils.plot_signals(noisy_signal,data_filtered, sr, args.num_FFT)
