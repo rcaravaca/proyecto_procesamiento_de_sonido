@@ -29,7 +29,7 @@ def parse_args():
 						help='')
 	parser.add_argument('--window', type=str, default='hamming',
 						help='')
-	parser.add_argument('--plot', default=False, action=argparse.BooleanOptionalAction)
+	# parser.add_argument('--plot', default=False, action=argparse.BooleanOptionalAction)
 
 	return check_args(parser.parse_args())
 
