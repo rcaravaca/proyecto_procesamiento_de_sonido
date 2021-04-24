@@ -11,7 +11,6 @@ def check_args(args):
 	# if not os.path.exists(args.datasets_dir):
 	# 	os.makedirs(args.datasets_dir)
 	assert args.num_FFT >= 1, 'number of FFT size must be larger than or equal to one'
-	assert args.hop_size < args.num_FFT, 'hop size must be smaller than number of FFT size'
 	return args
 
 def parse_args():
@@ -20,13 +19,13 @@ def parse_args():
 	# 					help='')
 	# parser.add_argument('--input_clean', type=str, default='datasets/clean.wav',
 	# 					help='datasets/clean_file_name.wav')
+	parser.add_argument('--filter_type', type=str, default='mmse',
+						help='mmse | spect_sub | wiener')
 	parser.add_argument('--input_noisy', type=str, default='datasets/noisy_white_3dB.wav',
 						help='datasets/noisy_file_name.wav')
 	parser.add_argument('--output_file', type=str, default='datasets/clean_estimated_MMSE_STSA_test.wav',
 						help='datasets/output_file_name.wav')
 	parser.add_argument('--num_FFT', type=int, default='256',
-						help='')
-	parser.add_argument('--hop_size', type=int, default='128',
 						help='')
 	parser.add_argument('--window', type=str, default='hamming',
 						help='')
@@ -39,8 +38,9 @@ def normalize(signal):
 	max_val = np.max(np.abs(signal))
 	return signal/max_val
 
-def plot_signals(noisy_test, signal_reconstructed_clean, sr, NFFT, hop_length):
+def plot_signals(noisy_test, signal_reconstructed_clean, sr, NFFT):
 
+	hop_length = NFFT//2
 	noisy_test_norm = normalize(noisy_test)
 	signal_reconstructed_clean_norm = normalize(signal_reconstructed_clean)
 
