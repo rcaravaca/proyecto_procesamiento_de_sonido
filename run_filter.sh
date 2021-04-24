@@ -150,4 +150,15 @@ else
 	mv $1/filtered/snr_10/joseline/*_mix_filtered_1??.wav $1/filtered/snr_10/joseline/test/
 	mv $1/filtered/snr_10/joseline/*_mix_filtered_???.wav $1/filtered/snr_10/joseline/train/
 
+
+	for folder in $(ls $1/*/*/carolina/t* -d); do
+		mkdir $folder/carolina
+		mv $folder/*wav $folder/carolina
+	done
+
+	for folder in $(ls $1/*/*/joseline/t* -d); do
+		mkdir $folder/joseline
+		mv $folder/*wav $folder/joseline
+	done
+
 fi
