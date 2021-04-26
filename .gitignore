@@ -1,0 +1,4 @@
+dataset/
+__pycache__/
+spectral_substraction/__pycache__/spectral_subs.cpython-38.pyc
+temp.html

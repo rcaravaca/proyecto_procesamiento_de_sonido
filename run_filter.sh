@@ -1,3 +1,7 @@
+# bash run_filter.sh dataset/pasos_ruido_XXX_carolina_joseline_michelle/ <filter>
+# <filter> = spect_sub or mmse or wiener
+# XXX = babble or oficina or blanco
+
 
 if [[ $# -eq 0 ]] ; then
 	echo 'SH_ERROR: No arguments'
