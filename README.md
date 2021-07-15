@@ -39,3 +39,8 @@ Para cada ruido:
 		- SNR = -10:
 	3.  Wiener
 		- SNR = -10:
+
+python3 ../pyAudioAnalysis/audioAnalysis.py trainClassifier -i dataset/pasos_babble_carolina_joseline_michelle/mmse/original/snr_10/carolina/train/carolina/ dataset/pasos_babble_carolina_joseline_michelle/mmse/original/snr_10/joseline/train/joseline/ --method svm -o trained_models/original_snr_10
+
+
+./evaluate_model.py --class1 dataset/pasos_babble_carolina_joseline_michelle/mmse/original/snr_-10/carolina/test/carolina --class2 dataset/pasos_babble_carolina_joseline_michelle/mmse/original/snr_-10/joseline/test/joseline --model trained_models/original_snr_10 --pos_class carolina

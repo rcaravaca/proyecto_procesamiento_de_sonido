@@ -2,6 +2,7 @@
 
 from pyAudioAnalysis import audioTrainTest as aT
 from sklearn import metrics
+import matplotlib.pyplot as plt
 
 import argparse
 
@@ -19,9 +20,22 @@ if __name__ == '__main__':
 
 	args = parse_args()
 
-	cm, thr_prre, pre, rec, thr_roc, fpr, tpr = aT.evaluate_model_for_folders([args.class1, args.class2], args.model, "svm", args.pos_class)
+	cm, thr_prre, pre, rec, thr_roc, fpr, tpr = aT.evaluate_model_for_folders([args.class1, args.class2], args.model, "svm", args.pos_class, plot=False)
 
 	AUC = metrics.auc(fpr, tpr)
 
-	print("AUC:", AUC)
+	# print("AUC:", AUC)
+	# print("Prec:", pre)
+	# print("thr_prre:", thr_prre)
 
+
+	plt.plot(thr_prre,pre[:-1], label="Precision")
+	plt.plot(thr_prre,rec[:-1], label="Recall")
+	plt.title("Precision-Recall")
+	plt.xlabel("Threshold")
+	plt.grid(True)
+	plt.legend()
+	plt.tight_layout()
+	# plt.autoscale(enable=None, axis="x", tight=True)
+	plt.savefig('testing.pdf')  
+	# plt.show()

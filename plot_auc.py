@@ -8,19 +8,49 @@ import numpy as np
 
 if __name__ == '__main__':
 
-	snr = np.array([-10, -5, 0, 5, 10])
+	# snr = np.array([0, -10, 10, -5, 5])
 
-	mmse_AUC = np.array([0.4807692307692308, 0.4807692307692308, 0.5192307692307692, 0.5902366863905326, 0.8498520710059171])
-	spect_sub_AUC = np.array([0.5547337278106509, 0.6124260355029585, 0.8032544378698225, 0.9718934911242604, 0.9970414201183433])
-	wiener_AUC = np.array([0.5147928994082841, 0.6301775147928994, 0.8017751479289941, 0.9792899408284024, 1])
+	thr = [25,50,75,100,125,150]
+	AP = [5.21,52.56,68.05,74.73,77.91,79.87]
+	Recall = [17.00, 60.49, 70.86, 76.39, 79.05, 80.78 ]
+
+
+# 	mmse_AUC = np.array([0.8535502958579881,
+# 0.6168639053254438,
+# 0.9600591715976331,
+# 0.6849112426035503,
+# 0.9452662721893492])
+
+# 	spect_sub_AUC = np.array([0.9792899408284024,
+# 0.6893491124260355,
+# 0.9585798816568049,
+# 0.8313609467455622,
+# 0.9985207100591716])
+
+# 	wiener_AUC = np.array([0.970414201183432,
+# 0.7292899408284024,
+# 0.9600591715976331,
+# 0.8624260355029587,
+# 0.9437869822485208])
+
+	# snr, mmse_AUC = zip(*sorted(zip(snr, mmse_AUC)))
+
+	# snr = np.array([0, -10, 10, -5, 5])
+	# snr, spect_sub_AUC = zip(*sorted(zip(snr, spect_sub_AUC)))
+
+	# snr = np.array([0, -10, 10, -5, 5])
+	# snr, wiener_AUC = zip(*sorted(zip(snr, wiener_AUC)))
 
 	plt.figure()
-	plt.plot(snr, mmse_AUC, '--o', label="mmse")
-	plt.plot(snr, spect_sub_AUC, '--o', label="spectral subs")
-	plt.plot(snr, wiener_AUC, '--o', label="wiener")
+	plt.plot(AP,1-Recall, '--o', label="AP")
+	# plt.plot(thr, Recall, '--o', label="Recall")
+	# plt.plot(snr, wiener_AUC, '--o', label="wiener")
 	plt.grid(True)
-	plt.title("AUC vs SNR")
-	plt.xlabel("SNR")
-	plt.ylabel("AUC")
-	plt.legend()
+	# plt.title("AUC vs SNR")
+	plt.xlabel("Threshold/mm")
+	# plt.ylabel("AUC")
+	plt.legend(loc='lower right')
 	plt.show()
+
+
+
