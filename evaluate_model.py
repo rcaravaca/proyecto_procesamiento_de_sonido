@@ -27,7 +27,9 @@ if __name__ == '__main__':
 
 	noises 		= ['ruido_blanco']
 	classifiers = ["svm", "knn", "randomforest"]
+	# classifiers = ["svm"]
 	filters 	= ['mmse', 'spect_sub', 'wiener']
+	# filters 	= ['mmse']
 	snrs 		= ["snr_-10", "snr_-5", "snr_0", "snr_5", "snr_10"]
 
 	file_csv = open("datos.csv","a")
@@ -77,7 +79,6 @@ if __name__ == '__main__':
 					for filter in filters:
 
 						snr_dic = {}
-
 						for _snr in snrs:
 							snr = int(re.sub('snr_',  '', _snr))
 
@@ -100,15 +101,21 @@ if __name__ == '__main__':
 
 							file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
-
 						plt.plot(snr_dic.keys(),snr_dic.values(), '--o', label=filter)
 
-			plt.title(str(noise)+ " - " + str(clss)+" - AUC vs SNR")
+			if noise == "ruido_blanco":
+				plt.title("White noise and " + str(clss) + " classifier")
+			elif noise == "babble":
+				plt.title("Babble noise and " + str(clss) + " classifier")
+			elif noise == "oficina":
+				plt.title("Office noise and " + str(clss) + " classifier")
 			plt.xlabel("SNR")
+			plt.ylabel("AUC")
 			plt.grid(True)
 			plt.legend()
-			plt_name = str(noise) + "_" + str(clss) + ".pdf"
+			plt_name = "auc" + str(noise) + "_" + str(clss) + ".pdf"
 			print("INFO: saving :", plt_name)
 			plt.savefig(plt_name)
+
 
 	file_csv.close()
