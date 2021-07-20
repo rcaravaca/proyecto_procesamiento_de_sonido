@@ -25,14 +25,15 @@ if __name__ == '__main__':
 	dir = os.path.dirname("trained_models/")
 	# noises = os.listdir(dir)
 
-	noises 		= ['ruido_blanco']
+	noises 		= ['oficina']
+	# noises 	= ['ruido_blanco']
 	classifiers = ["svm", "knn", "randomforest"]
 	# classifiers = ["svm"]
 	filters 	= ['mmse', 'spect_sub', 'wiener']
 	# filters 	= ['mmse']
 	snrs 		= ["snr_-10", "snr_-5", "snr_0", "snr_5", "snr_10"]
 
-	file_csv = open("datos.csv","a")
+	file_csv = open("datos_round_2.csv","a")
 
 	for clss in classifiers:
 
@@ -67,11 +68,12 @@ if __name__ == '__main__':
 						print("ACC:", accuracy)
 
 						auc = metrics.auc(fpr, tpr)
-						snr_dic.update({snr: auc})
+						# snr_dic.update({snr: auc})
+						snr_dic.update({snr: accuracy})
 
 						file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
-					plt.plot(snr_dic.keys(),snr_dic.values(), '--o', label="No filter")
+					plt.plot(list(snr_dic.keys()),list(snr_dic.values()), '--o', label="No filter")
 
 
 				elif condition == "filtered":
@@ -97,11 +99,12 @@ if __name__ == '__main__':
 							print("ACC:", accuracy)
 
 							auc = metrics.auc(fpr, tpr)
-							snr_dic.update({snr: auc})
+							# snr_dic.update({snr: auc})
+							snr_dic.update({snr: accuracy})
 
 							file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
-						plt.plot(snr_dic.keys(),snr_dic.values(), '--o', label=filter)
+						plt.plot(list(snr_dic.keys()),list(snr_dic.values()), '--o', label=filter)
 
 			if noise == "ruido_blanco":
 				plt.title("White noise and " + str(clss) + " classifier")
@@ -110,10 +113,12 @@ if __name__ == '__main__':
 			elif noise == "oficina":
 				plt.title("Office noise and " + str(clss) + " classifier")
 			plt.xlabel("SNR")
-			plt.ylabel("AUC")
+			# plt.ylabel("AUC")
+			plt.ylabel("ACCURACY")
 			plt.grid(True)
 			plt.legend()
-			plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
+			# plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
+			plt_name = "accuracy_" + str(noise) + "_" + str(clss) + ".pdf"
 			print("INFO: saving :", plt_name)
 			plt.savefig(plt_name)
 
