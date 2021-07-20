@@ -67,7 +67,7 @@ if __name__ == '__main__':
 						print("ACC:", accuracy)
 
 						auc = metrics.auc(fpr, tpr)
-						snr_dic.update({snr: auc})
+						snr_dic.update({snr: accuracy})
 
 						file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
@@ -97,7 +97,7 @@ if __name__ == '__main__':
 							print("ACC:", accuracy)
 
 							auc = metrics.auc(fpr, tpr)
-							snr_dic.update({snr: auc})
+							snr_dic.update({snr: accuracy})
 
 							file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
@@ -110,10 +110,11 @@ if __name__ == '__main__':
 			elif noise == "oficina":
 				plt.title("Office noise and " + str(clss) + " classifier")
 			plt.xlabel("SNR")
-			plt.ylabel("AUC")
+			plt.ylabel("Accuracy")
+			plt.ylim((0, 1.1))
 			plt.grid(True)
 			plt.legend()
-			plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
+			plt_name = "accuracy_" + str(noise) + "_" + str(clss) + ".pdf"
 			print("INFO: saving :", plt_name)
 			plt.savefig(plt_name)
 
