@@ -113,7 +113,7 @@ if __name__ == '__main__':
 			plt.ylabel("AUC")
 			plt.grid(True)
 			plt.legend()
-			plt_name = "auc" + str(noise) + "_" + str(clss) + ".pdf"
+			plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
 			print("INFO: saving :", plt_name)
 			plt.savefig(plt_name)
 
