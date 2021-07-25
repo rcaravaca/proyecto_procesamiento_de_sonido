@@ -25,7 +25,7 @@ if __name__ == '__main__':
 	dir = os.path.dirname("trained_models/")
 	# noises = os.listdir(dir)
 
-	noises 		= ['oficina']
+	noises 		= ['ruido_blanco', 'babble']
 	# noises 	= ['ruido_blanco']
 	classifiers = ["svm", "knn", "randomforest"]
 	# classifiers = ["svm"]
@@ -44,6 +44,7 @@ if __name__ == '__main__':
 			print("###############################################################################")
 
 			plt.figure()
+			plt.rcParams.update({'font.size': 15})
 			for condition in os.listdir(str(dir) + "/" + noise):
 
 				if condition == "original":
@@ -68,11 +69,9 @@ if __name__ == '__main__':
 						print("ACC:", accuracy)
 
 						auc = metrics.auc(fpr, tpr)
-<<<<<<< HEAD
-=======
+
 						# snr_dic.update({snr: auc})
->>>>>>> e58ce1a431a72b8cb3a9e1e38ae3d59636687f3a
-						snr_dic.update({snr: accuracy})
+						snr_dic.update({snr: auc})
 
 						file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
@@ -92,6 +91,7 @@ if __name__ == '__main__':
 							class1 = os.path.dirname("dataset/pasos_" +str(noise)+"_carolina_joseline_michelle/"+str(filter)+"/filtered/"+str(_snr)+"/carolina/test/carolina/")
 							class2 = os.path.dirname("dataset/pasos_" +str(noise)+"_carolina_joseline_michelle/"+str(filter)+"/filtered/"+str(_snr)+"/joseline/test/joseline/")
 							model = "trained_models/"+str(noise)+"/filtered/"+str(filter)+"/"+str(clss)+"/"+str(_snr)+"/model"
+							print(model)
 							cm, thr_prre, pre, rec, thr_roc, fpr, tpr = aT.evaluate_model_for_folders([class1, class2], model, clss, "carolina", plot=False)
 
 							TP = cm[0][0]
@@ -102,11 +102,9 @@ if __name__ == '__main__':
 							print("ACC:", accuracy)
 
 							auc = metrics.auc(fpr, tpr)
-<<<<<<< HEAD
-=======
+
 							# snr_dic.update({snr: auc})
->>>>>>> e58ce1a431a72b8cb3a9e1e38ae3d59636687f3a
-							snr_dic.update({snr: accuracy})
+							snr_dic.update({snr: auc})
 
 							file_csv.write(str(noise)+","+str(condition)+","+str(clss)+","+str(snr)+","+str(auc)+","+str(accuracy)+"\n")
 
@@ -119,20 +117,16 @@ if __name__ == '__main__':
 			elif noise == "oficina":
 				plt.title("Office noise and " + str(clss) + " classifier")
 			plt.xlabel("SNR")
-<<<<<<< HEAD
-			plt.ylabel("Accuracy")
+			plt.ylabel("AUC")
 			plt.ylim((0, 1.1))
 			plt.grid(True)
 			plt.legend()
-=======
-			# plt.ylabel("AUC")
-			plt.ylabel("ACCURACY")
-			plt.grid(True)
-			plt.legend()
+
 			# plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
->>>>>>> e58ce1a431a72b8cb3a9e1e38ae3d59636687f3a
-			plt_name = "accuracy_" + str(noise) + "_" + str(clss) + ".pdf"
+			plt_name = "auc_" + str(noise) + "_" + str(clss) + ".pdf"
 			print("INFO: saving :", plt_name)
+			
+			# plt.rc('font', size=20) 
 			plt.savefig(plt_name)
 
 
